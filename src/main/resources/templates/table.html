@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.1/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/datatables.css"/>
+
+    <style>
+        .overflow {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+<div>
+    <form method="POST" enctype="multipart/form-data" action="/">
+        <table border="0">
+            <tr>
+                <td>Json file</td>
+                <td><input type="file" name="file"></td>
+            </tr>
+            <tr>
+                <td align="left"><input type="submit" value="Upload"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div id="rejected" class="tabcontent">
+    <h3>Event</h3>
+    <table class="ui celled structured table" id="rejectedTable">
+        <thead>
+            <tr>
+                <th style="max-width: 5vw; width: 5vw">text</th>
+                <th style="max-width: 5vw; width: 5vw">username</th>
+                <th style="max-width: 5vw; width: 5vw">botId</th>
+                <th style="max-width: 5vw; width: 5vw">isAutoSplit</th>
+                <th style="max-width: 5vw; width: 5vw">type</th>
+                <th style="max-width: 5vw; width: 5vw">subtype</th>
+                <th style="max-width: 5vw; width: 5vw">ts</th>
+            </tr>
+            <tr>
+                <th colspan="7" style="padding: 0">
+                    <h3>SMEvent</h3>
+                    <table style="width: 100%" cellpadding="0" cellspacing="0" border="0">
+                        <thead>
+                            <tr>
+                                <th style="border-bottom: none; max-width: 5vw; width: 5vw">id</th>
+                                <th style="border-bottom: none; max-width: 5vw; width: 5vw">teamId</th>
+                                <th style="border-bottom: none; max-width: 5vw; width: 5vw">type</th>
+                                <th style="border-bottom: none; max-width: 5vw; width: 5vw">fixtureId</th>
+                                <th style="border-bottom: none; max-width: 5vw; width: 5vw">playerId</th>
+                                <th style="border-bottom: none; max-width: 10vw; width: 10vw">playerName</th>
+                                <th style="border-bottom: none; max-width: 5vw; width: 5vw">relatedPlayerId</th>
+                                <th style="border-bottom: none; max-width: 10vw; width: 10vw">relatedPlayerName</th>
+                                <th style="border-bottom: none; max-width: 10vw; width: 10vw">minute</th>
+                                <th style="border-bottom: none; max-width: 10vw; width: 10vw">extraMinute</th>
+                                <th style="border-bottom: none; max-width: 10vw; width: 10vw">reason</th>
+                                <th style="border-bottom: none; max-width: 10vw; width: 10vw">injuried</th>
+                                <th style="border-bottom: none; max-width: 10vw; width: 10vw">result</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${events.empty}">
+
+        </tr>
+            <tr th:each="event : ${events}">
+                <td colspan="7" style="padding: 0">
+                    <table style="width: 100%" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td class="overflow" style="max-width: 5vw; width: 5vw"><span th:text="${event.getText()}"> Title </span></td>
+                                <td class="overflow" style="max-width: 5vw; width: 5vw"><span th:text="${event.getUsername()}"> Title </span></td>
+                                <td class="overflow" style="max-width: 5vw; width: 5vw"><span th:text="${event.getBotId()}"> Title </span></td>
+                                <td class="overflow" style="max-width: 5vw; width: 5vw"><span th:text="${event.getIsAutoSplit()}"> Title </span></td>
+                                <td class="overflow" style="max-width: 5vw; width: 5vw"><span th:text="${event.getType()}"> Title </span></td>
+                                <td class="overflow" style="max-width: 5vw; width: 5vw"><span th:text="${event.getSubtype()}"> Title </span></td>
+                                <td class="overflow" style="max-width: 5vw; width: 5vw"><span th:text="${event.getTs()}"> Title </span></td>
+                            </tr>
+                            <tr th:each="SMevent : ${event.getSmEvents()}" style="padding: 0">
+                                <td colspan="7" style="padding: 0">
+                                    <table style="width: 100%" cellpadding="0" cellspacing="0">
+                                        <tbody>
+                                        <tr>
+                                            <td class="overflow" style="background-color: #c9eecb; width: 5vw; max-width: 5vw"><span th:text="${SMevent.id}"></span></td>
+                                            <td class="overflow" style="background-color: #c9eecb; width: 5vw; max-width: 5vw"><span th:text="${SMevent.teamId}"></span></td>
+                                            <td class="overflow" style="background-color: #c9eecb; width: 5vw; max-width: 5vw"><span th:text="${SMevent.type}"></span></td>
+                                            <td class="overflow" style="background-color: #c9eecb; width: 5vw; max-width: 5vw"><span th:text="${SMevent.fixtureId}"></span></td>
+                                            <td class="overflow" style="background-color: #c9eecb; width: 5vw; max-width: 5vw"><span th:text="${SMevent.fixtureId}"></span></td>
+                                            <td class="overflow" style="background-color: #c9eecb; width: 10vw; max-width: 10vw"><span th:text="${SMevent.playerName}"></span></td>
+                                            <td class="overflow" style="background-color: #c9eecb; width: 5vw; max-width: 5vw"><span th:text="${SMevent.relatedPlayerId}"></span></td>
+                                            <td class="overflow" style="background-color: #c9eecb; width: 10vw; max-width: 10vw"><span th:text="${SMevent.relatedPlayerName}"></span></td>
+                                            <td class="overflow" style="background-color: #c9eecb; width: 10vw; max-width: 10vw"><span th:text="${SMevent.minute}"></span></td>
+                                            <td class="overflow" style="background-color: #c9eecb; width: 10vw; max-width: 10vw"><span th:text="${SMevent.extraMinute}"></span></td>
+                                            <td class="overflow" style="background-color: #c9eecb; width: 10vw; max-width: 10vw"><span th:text="${SMevent.reason}"></span></td>
+                                            <td class="overflow" style="background-color: #c9eecb; width: 10vw; max-width: 10vw"><span th:text="${SMevent.injuried}"></span></td>
+                                            <td class="overflow" style="background-color: #c9eecb; width: 10vw; max-width: 10vw"><span th:text="${SMevent.result}"></span></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
