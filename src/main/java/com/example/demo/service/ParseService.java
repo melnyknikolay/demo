@@ -28,7 +28,7 @@ public class ParseService {
             parseTextForSMEvents(event);
         }
 
-        return events.stream().limit(2000).collect(Collectors.toList());
+        return events.stream().limit(1000).collect(Collectors.toList());
     }
 
     private void parseTextForSMEvents(Event event) throws IOException {

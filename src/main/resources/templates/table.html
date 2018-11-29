@@ -71,7 +71,7 @@
         </thead>
         <tbody>
         <tr th:if="${events.empty}">
-
+            <td colspan="2"><span th:text="${#message}"> Title </span></td>
         </tr>
             <tr th:each="event : ${events}">
                 <td colspan="7" style="padding: 0">

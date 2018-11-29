@@ -27,4 +27,15 @@ public class testData {
             .type("type")
             .smEvents(Collections.EMPTY_LIST)
             .build();
+
+    public static String TEST_JSON = "[{\n" +
+            "        \"text\": \"Events for game id:19481 apiId:10449463 CSKA Moskva vs Viktoria Plzeň:\\n\",\n" +
+            "        \"ts\": \"1543339536.000200\"\n" +
+            "    }]";
+
+    public static Event TEST_EVENT = Event.builder()
+            .text("Events for game id:19481 apiId:10449463 CSKA Moskva vs Viktoria Plzeň:")
+            .ts("1543339536.000200")
+            .smEvents(Collections.EMPTY_LIST)
+            .build();
 }
