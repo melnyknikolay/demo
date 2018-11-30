@@ -5,14 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//@JsonInclude(JsonInclude.Include.NON_NULL)
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicLong;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class SMEvent {
+    private static final AtomicLong COUNTER = new AtomicLong();
 
     private Long id;
+    private Long smEventId;
     private Long teamId;
     private String type;
     private Long fixtureId;
@@ -26,4 +30,23 @@ public class SMEvent {
     private String injuried;
     private String result;
 
+    public static Long generateId(){
+        return COUNTER.incrementAndGet();
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SMEvent smEvent = (SMEvent) o;
+        return Objects.equals(type, smEvent.type) &&
+                Objects.equals(playerId, smEvent.playerId) &&
+                Objects.equals(minute, smEvent.minute);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, playerId, minute);
+    }
 }

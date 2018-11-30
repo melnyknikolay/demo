@@ -28,7 +28,7 @@ public class ParseService {
             parseTextForSMEvents(event);
         }
 
-        return events.stream().limit(1000).collect(Collectors.toList());
+        return events.stream().collect(Collectors.toList());
     }
 
     private void parseTextForSMEvents(Event event) throws IOException {
@@ -64,7 +64,8 @@ public class ParseService {
         Arrays.stream(line.substring(line.indexOf('(') + 1, line.indexOf(')')).split(","))
                 .forEach(str -> pairParameters.put(str.substring(0, str.indexOf('=')).trim(), str.substring(str.indexOf('=') + 1).trim()));
         SMEvent sm = SMEvent.builder()
-                .id(parseLong(pairParameters.get("id")))
+                .id(SMEvent.generateId())
+                .smEventId(parseLong(pairParameters.get("id")))
                 .teamId(parseLong(pairParameters.get("teamId")))
                 .type(validString(pairParameters.get("type")))
                 .fixtureId(parseLong(pairParameters.get("fixtureId")))
